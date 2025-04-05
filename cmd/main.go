@@ -13,9 +13,13 @@ func main() {
 
 	log := logger.New(cfg.Env)
 
-	log.Info("launch a bot...")
+	log.Info("launch a application...")
 
-	bot := app.New(log, cfg.Token)
+	application := app.New(log, cfg.Token)
 
-	log.Info("bot started", slog.Any("main", bot))
+	log.Info("application started", slog.Any("main", application))
+
+	log.Info("bot running...", slog.Any("main", application.Bot))
+
+	application.Bot.MustRun(&cfg.Registrars)
 }

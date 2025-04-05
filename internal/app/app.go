@@ -7,7 +7,7 @@ import (
 )
 
 type App struct {
-	bot *bot.Bot
+	Bot *bot.Bot
 	log *slog.Logger
 }
 
@@ -15,7 +15,7 @@ func New(log *slog.Logger, token string) *App {
 	bot := bot.New(log, token)
 
 	return &App{
-		bot: bot,
+		Bot: bot,
 		log: log,
 	}
 }

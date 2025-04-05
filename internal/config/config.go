@@ -9,19 +9,19 @@ import (
 type Config struct {
 	Env        string      `yaml:"env"`
 	Token      string      `yaml:"token"`
-	Registrars []registrar `yaml:"registrars"`
+	Registrars []Registrar `yaml:"registrars"`
 }
 
-type registrar struct {
-	ChatId string `yaml:"chat_id"`
+type Registrar struct {
+	ChatId int64 `yaml:"chat_id"`
 }
 
 func MustLoad() *Config {
-	configPath := "config/config.yaml"
-	// configPath := os.Getenv("CONFIG_PATH")
-	// if configPath == "" {
-	// 	panic("config path is empty")
-	// }
+	//configPath := "config/config.yaml"
+	configPath := os.Getenv("CONFIG_PATH")
+	if configPath == "" {
+		panic("config path is empty")
+	}
 
 	return MustLoadPath(configPath)
 }
