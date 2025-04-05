@@ -1,3 +1,4 @@
+env: # local or prod
 token: # bot token
 registrars: # chat id registrars
   - chat_id: 
