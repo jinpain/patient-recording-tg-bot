@@ -5,31 +5,32 @@ import (
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/jinpain/patient-recording-tg-bot/internal/app/bot/handler"
-	"github.com/jinpain/patient-recording-tg-bot/internal/config"
 )
 
 type Bot struct {
-	bot     *tgbotapi.BotAPI
-	log     *slog.Logger
-	handler *handler.Handler
+	bot       *tgbotapi.BotAPI
+	log       *slog.Logger
+	handler   *handler.Handler
+	registrar int64
 }
 
-func New(log *slog.Logger, token string) *Bot {
+func New(log *slog.Logger, token string, registrar int64) *Bot {
 	bot, err := tgbotapi.NewBotAPI(token)
 	if err != nil {
 		log.Error("Recovered from panic", slog.Any("panic", err))
 	}
 
-	handler := handler.New(log)
+	handler := handler.New(log, registrar)
 
 	return &Bot{
-		bot:     bot,
-		log:     log,
-		handler: handler,
+		bot:       bot,
+		log:       log,
+		handler:   handler,
+		registrar: registrar,
 	}
 }
 
-func (b *Bot) MustRun(registrars *[]config.Registrar) {
+func (b *Bot) MustRun() {
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 1
 
@@ -37,7 +38,19 @@ func (b *Bot) MustRun(registrars *[]config.Registrar) {
 
 	for update := range updates {
 		if update.Message != nil {
-			b.handler.NewMessage(b.bot, update.Message, registrars)
+			if update.Message.IsCommand() {
+				b.handler.NewCommand(b.bot, update.Message)
+			} else if update.Message.Photo != nil {
+				b.handler.NewPhoto(b.bot, update.Message)
+			} else {
+				b.handler.NewMessage(b.bot, update.Message)
+			}
+		} else if update.CallbackQuery != nil {
+			b.handler.NewCallback(b.bot, update.CallbackQuery)
 		}
 	}
 }
+
+// func (b *Bot) isRegistrar(chatId int64) bool {
+// 	return b.registrar == chatId
+// }

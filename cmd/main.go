@@ -15,11 +15,11 @@ func main() {
 
 	log.Info("launch a application...")
 
-	application := app.New(log, cfg.Token)
+	application := app.New(log, cfg.Token, cfg.Registrar.ChatId)
 
 	log.Info("application started", slog.Any("main", application))
 
 	log.Info("bot running...", slog.Any("main", application.Bot))
 
-	application.Bot.MustRun(&cfg.Registrars)
+	application.Bot.MustRun()
 }

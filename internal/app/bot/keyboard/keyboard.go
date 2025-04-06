@@ -2,18 +2,21 @@ package keyboard
 
 import tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 
-var RegistrarMenuKeyboard = tgbotapi.NewReplyKeyboard(
+var UserMenuKeyboard = tgbotapi.NewReplyKeyboard(
 	tgbotapi.NewKeyboardButtonRow(
-		tgbotapi.NewKeyboardButton("Активные записи"),
-		tgbotapi.NewKeyboardButton("Закрытые записи"),
-		tgbotapi.NewKeyboardButton("Все записи"),
+		tgbotapi.NewKeyboardButton("Записаться на прием"),
 	),
 )
 
-var UserMenuKeyboard = tgbotapi.NewReplyKeyboard(
-	tgbotapi.NewKeyboardButtonRow(
-		tgbotapi.NewKeyboardButton("Записаться"),
-		tgbotapi.NewKeyboardButton("Мои активные записи"),
-		tgbotapi.NewKeyboardButton("Все записи"),
+var UserConfirmRecordingKeyboard = tgbotapi.NewInlineKeyboardMarkup(
+	tgbotapi.NewInlineKeyboardRow(
+		tgbotapi.NewInlineKeyboardButtonData("Подтвердить", "confirm_recording"),
+		tgbotapi.NewInlineKeyboardButtonData("Отменить", "cancel_recording"),
+	),
+)
+
+var RegistrarConfirmRecordingKeyboard = tgbotapi.NewInlineKeyboardMarkup(
+	tgbotapi.NewInlineKeyboardRow(
+		tgbotapi.NewInlineKeyboardButtonData("Ответить", "reg_confirm_recording"),
 	),
 )

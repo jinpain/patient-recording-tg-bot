@@ -1,27 +1,21 @@
 package handler
 
 import (
-	"log/slog"
-
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"github.com/jinpain/patient-recording-tg-bot/internal/config"
+	"github.com/jinpain/patient-recording-tg-bot/internal/common"
 )
 
-type Handler struct {
-	log *slog.Logger
-}
+func (h *Handler) NewMessage(bot *tgbotapi.BotAPI, message *tgbotapi.Message) {
+	if h.response.RegistrarChatId == message.Chat.ID {
+		if common.RecordingInProgress != nil {
 
-func New(log *slog.Logger) *Handler {
-	return &Handler{
-		log: log,
-	}
-}
+		}
+	} else {
+		switch message.Text {
+		case "Записаться на прием":
+			h.response.RecordingUser(bot, message)
+		default:
 
-func (h *Handler) NewMessage(bot *tgbotapi.BotAPI, message *tgbotapi.Message, registrars *[]config.Registrar) {
-	switch message.Text {
-	case "/start":
-		h.start(bot, message, registrars)
-	default:
-
+		}
 	}
 }

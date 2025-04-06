@@ -11,8 +11,8 @@ type App struct {
 	log *slog.Logger
 }
 
-func New(log *slog.Logger, token string) *App {
-	bot := bot.New(log, token)
+func New(log *slog.Logger, token string, registrar int64) *App {
+	bot := bot.New(log, token, registrar)
 
 	return &App{
 		Bot: bot,

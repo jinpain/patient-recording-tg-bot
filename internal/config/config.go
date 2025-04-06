@@ -7,9 +7,9 @@ import (
 )
 
 type Config struct {
-	Env        string      `yaml:"env"`
-	Token      string      `yaml:"token"`
-	Registrars []Registrar `yaml:"registrars"`
+	Env       string    `yaml:"env"`
+	Token     string    `yaml:"token"`
+	Registrar Registrar `yaml:"registrar"`
 }
 
 type Registrar struct {
