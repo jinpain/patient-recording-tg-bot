@@ -1,6 +1,7 @@
 package bot
 
 import (
+	"fmt"
 	"log/slog"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
@@ -18,7 +19,7 @@ type Bot struct {
 func New(log *slog.Logger, token string, registrar int64) *Bot {
 	bot, err := tgbotapi.NewBotAPI(token)
 	if err != nil {
-		log.Error("Recovered from panic", slog.Any("panic", err))
+		panic(fmt.Sprintf("Recovered from panic: %v", err))
 	}
 
 	handler := handler.New(log, registrar)
@@ -51,7 +52,3 @@ func (b *Bot) MustRun() {
 		}
 	}
 }
-
-// func (b *Bot) isRegistrar(chatId int64) bool {
-// 	return b.registrar == chatId
-// }

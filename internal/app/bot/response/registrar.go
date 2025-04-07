@@ -30,14 +30,14 @@ func (r *Response) ResponseReg(bot *tgbotapi.BotAPI, message *tgbotapi.Message) 
 
 		sentForwardMsg, err := bot.Send(forwardMsg)
 		if err != nil {
-			r.log.Error("PhotoUser", slog.Any("error", err))
+			r.log.Error("ResponseReg", slog.Any("error", err))
 		}
 
 		str := strings.Split(message.Caption, "№")[1]
 
 		chatId, _ := strconv.ParseInt(str, 10, 64)
 
-		fmt.Println(chatId, message.Caption, str)
+		r.log.Info("ResponseReg", slog.Any("info", fmt.Sprintf("Обработан: %v", chatId)))
 
 		common.MessageInProgress = &common.Message{
 			ChatId: chatId,
@@ -47,8 +47,6 @@ func (r *Response) ResponseReg(bot *tgbotapi.BotAPI, message *tgbotapi.Message) 
 
 		common.MessageInProgress.MessagesId = append(common.MessageInProgress.MessagesId, sentForwardMsg.MessageID)
 	}
-
-	fmt.Println(common.MessageInProgress)
 }
 
 func (r *Response) ResponseConfirmationReg(bot *tgbotapi.BotAPI, message *tgbotapi.Message) {
