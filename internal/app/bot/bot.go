@@ -4,6 +4,7 @@ import (
 	"log/slog"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+
 	"github.com/jinpain/patient-recording-tg-bot/internal/app/bot/handler"
 )
 

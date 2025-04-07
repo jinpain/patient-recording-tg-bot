@@ -11,8 +11,12 @@ func (h *Handler) NewCallback(bot *tgbotapi.BotAPI, callback *tgbotapi.CallbackQ
 		h.response.RecordingRegistrar(bot, callback.Message)
 	case "cancel_recording":
 		h.response.CancelRecordingUser(bot, callback.Message)
-	case "reg_confirm_recording":
-		h.response.ConfirmRecordingReg(bot, callback.Message)
+	case "reg_response":
+		h.response.ResponseReg(bot, callback.Message)
+	case "reg_resp_confirm_recording":
+		h.response.ConfirmResponseReg(bot, callback.Message)
+	case "reg_resp_cancel_recording":
+		h.response.DeleteMessagesCache(bot, callback.Message, true)
 	default:
 
 	}

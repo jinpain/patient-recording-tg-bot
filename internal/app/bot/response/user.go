@@ -4,6 +4,7 @@ import (
 	"log/slog"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+
 	"github.com/jinpain/patient-recording-tg-bot/internal/app/bot/command"
 	"github.com/jinpain/patient-recording-tg-bot/internal/app/bot/keyboard"
 )
@@ -53,10 +54,10 @@ func (h *Response) ConfirmRecordingUser(bot *tgbotapi.BotAPI, message *tgbotapi.
 }
 
 func (h *Response) CancelRecordingUser(bot *tgbotapi.BotAPI, message *tgbotapi.Message) {
-	replyMarkup := tgbotapi.NewEditMessageReplyMarkup(message.Chat.ID, message.MessageID, tgbotapi.InlineKeyboardMarkup{InlineKeyboard: make([][]tgbotapi.InlineKeyboardButton, 0)})
+	msgDel := tgbotapi.NewDeleteMessage(message.Chat.ID, message.MessageID)
 
-	if _, err := bot.Send(replyMarkup); err != nil {
-		h.log.Error("ConfirmRecordingUser", slog.Any("error", err))
+	if _, err := bot.Request(msgDel); err != nil {
+		h.log.Error("CancelRecordingUser", slog.Any("error", err))
 	}
 
 	msg := tgbotapi.NewMessage(message.Chat.ID, command.CancelRecording)
