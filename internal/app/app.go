@@ -4,6 +4,7 @@ import (
 	"log/slog"
 
 	"github.com/jinpain/patient-recording-tg-bot/internal/app/bot"
+	"github.com/jinpain/patient-recording-tg-bot/internal/config"
 )
 
 type App struct {
@@ -11,8 +12,8 @@ type App struct {
 	log *slog.Logger
 }
 
-func New(log *slog.Logger, token string, registrar int64) *App {
-	bot := bot.New(log, token, registrar)
+func New(log *slog.Logger, cfg *config.Config) *App {
+	bot := bot.New(log, cfg)
 
 	return &App{
 		Bot: bot,

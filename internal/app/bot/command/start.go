@@ -1,3 +1,3 @@
 package command
 
-const Start = `start command`
+const Start = `Здравствуйте, для записи на прием, нажмите кнопку "Записаться на прием`

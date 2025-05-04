@@ -15,7 +15,7 @@ func main() {
 
 	log.Info("launch a application...")
 
-	application := app.New(log, cfg.Token, cfg.Registrar.ChatId)
+	application := app.New(log, cfg)
 
 	log.Info("application started", slog.Any("main", application))
 

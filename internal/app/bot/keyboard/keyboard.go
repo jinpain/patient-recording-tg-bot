@@ -10,8 +10,8 @@ var UserMenuKeyboard = tgbotapi.NewReplyKeyboard(
 
 var UserConfirmRecordingKeyboard = tgbotapi.NewInlineKeyboardMarkup(
 	tgbotapi.NewInlineKeyboardRow(
-		tgbotapi.NewInlineKeyboardButtonData("Подтвердить", "confirm_recording"),
-		tgbotapi.NewInlineKeyboardButtonData("Отменить", "cancel_recording"),
+		tgbotapi.NewInlineKeyboardButtonData("Подтвердить запись", "confirm_recording"),
+		tgbotapi.NewInlineKeyboardButtonData("Отменить запись", "cancel_recording"),
 	),
 )
 
@@ -26,4 +26,8 @@ var RegistrarSendResponseRecordingKeyboard = tgbotapi.NewInlineKeyboardMarkup(
 		tgbotapi.NewInlineKeyboardButtonData("Подтвердить", "reg_resp_confirm_recording"),
 		tgbotapi.NewInlineKeyboardButtonData("Отменить", "reg_resp_cancel_recording"),
 	),
+)
+
+var RemoveKeyboard = tgbotapi.NewInlineKeyboardMarkup(
+	make([]tgbotapi.InlineKeyboardButton, 0),
 )

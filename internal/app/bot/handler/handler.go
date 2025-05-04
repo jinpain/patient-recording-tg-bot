@@ -11,9 +11,9 @@ type Handler struct {
 	response *response.Response
 }
 
-func New(log *slog.Logger, registrarChatId int64) *Handler {
+func New(log *slog.Logger, registrarChatId int64, photoPath string) *Handler {
 	return &Handler{
 		log:      log,
-		response: response.New(log, registrarChatId),
+		response: response.New(log, registrarChatId, photoPath),
 	}
 }

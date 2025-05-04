@@ -9,6 +9,7 @@ import (
 type Config struct {
 	Env       string    `yaml:"env"`
 	Token     string    `yaml:"token"`
+	PhotoPath string    `yaml:"photo_path"`
 	Registrar Registrar `yaml:"registrar"`
 }
 
@@ -17,8 +18,8 @@ type Registrar struct {
 }
 
 func MustLoad() *Config {
-	//configPath := "config/config.yaml"
-	configPath := os.Getenv("CONFIG_PATH")
+	configPath := "config/config.yaml"
+	//configPath := os.Getenv("CONFIG_PATH")
 	if configPath == "" {
 		panic("config path is empty")
 	}
